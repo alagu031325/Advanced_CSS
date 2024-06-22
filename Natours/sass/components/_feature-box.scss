@@ -1,0 +1,38 @@
+.feature-box {
+  // The element will have a white background that is 80% opaque, allowing the background underneath to be partially visible.
+  background-color: rgba($color-white, 0.8);
+  //   child paragraph inherits this font-size
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+  transition: transform 0.3s ease-in-out;
+
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
+  &__icon {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    background-image: linear-gradient(
+      to right,
+      $color-primary-light,
+      $color-primary-dark
+    );
+    background-clip: text;
+    // we can do this since icon-font is a text
+    -webkit-background-clip: text;
+    color: transparent;
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.03);
+  }
+}

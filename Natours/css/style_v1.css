@@ -1,0 +1,250 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* universal selector selects each and every element on the page - we can also select all of the after pseudo elements and before pseudo elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* width and height must include padding and border aswell */
+  /* But by setting the box-size property on each and every element to inherit - it will force inheritance of box-sizing property */
+  box-sizing: inherit;
+}
+
+/* root font size is set in html */
+html {
+  /* 1rem = 10px and makes the calculations much simpler */
+  /* if we specify in pixels then we override the browser font size setting that the user can change - percentage relative to the font-size given by the browser */
+  font-size: 62.5%;
+}
+
+/* properties related to fonts are inherited */
+body {
+  /* font properties get inherited by all child elements of the body */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  /* 1.7 times bigger than the predefined line-height */
+  line-height: 1.7;
+  color: #777;
+  /* padding will not be inherited - divide by 10 to convert it to rem*/
+  /* padding: 30px; */
+  padding: 3rem;
+  /* box-sizing property is not inherited */
+  box-sizing: border-box;
+}
+
+.header {
+  position: relative;
+  /* always the height of the element should be 95 percent of viewport height */
+  height: 95vh;
+  /* url function to include image - gradient needs to be on top so we specify it as the first background image - 2 images one on top of another - reduce opacity to make bottom image visible - can also use 'to right bottom' as color direction*/
+  background-image: linear-gradient(
+      to right,
+      rgba(126, 213, 111, 0.539),
+      #28b485
+    ),
+    url(../img/hero.jpg);
+  /* makes the image fit inside the viewport width */
+  background-size: cover;
+  /* the top stays the same and bottom of the image is adjusted when viewport width/height changes, if center probably crops out at the top and bottom*/
+  background-position: top;
+  /* second point is 100% way from the first point of the width of the element - here we are specifying the 4 corners of the polygon in clockwise direction*/
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.header__logo-box {
+  position: absolute;
+  /* in reference to the parent element who position is set to relative */
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  /* width will automatically calculated by the browser */
+  height: 3.5rem;
+}
+
+/* animation to happen only when we hover not when we load the page */
+/* can use the animation all over the place by just defining it once */
+/* .logo-box:hover .logo {  
+  animation: moveInRight 1s ease-out;
+} */
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* translate -50% in both x and y directions to bring it to center - translate works in relation to the element itself*/
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* backface-visibility property determines if the back part of an element when we transform it is visible or hidden to the user - only if we are rotating and we want to see the backside of the element we can have it visible 
+  backface-visibility: hidden;
+  Hack to fix shaky animations but in modern browsers not needed*/
+  margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+  /* block level elements occupy the entire width that is available and they create line breaks */
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  /* specify animation name and duration to apply that animation */
+  animation-name: moveInLeft;
+  animation-duration: 2s;
+  /* This is a function that defines how the animation will proceed, how fast or how slow these transformations happen over time - ease-in, ease-out, ease-in-out, linear, step-start(built in animation timing functions) */
+  animation-timing-function: ease-out;
+  /* delay introduced before the animation starts to play - waits for 3s 
+  animation-delay: 3s;
+  To make animation happen n times
+  animation-iteration-count: 3;
+  */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  /* letter-spacing: 17.4px; */
+  letter-spacing: 1.75rem;
+  /* animation shorthand property */
+
+  animation: moveInRight 2s ease-out;
+}
+
+/* We can specify what we need to happen in each moment of time of the animation*/
+@keyframes moveInLeft {
+  /* Before animation actually starts at 0% */
+  0% {
+    opacity: 0;
+    /* animate in X direction - positive value means it goes to the right and negative value means it goes to the left */
+    transform: translateX(-10rem);
+  }
+
+  /* we can also add 80%(any percentage), what we need to happen when 80% of the animation if completed */
+  80% {
+    transform: translate(1rem);
+  }
+  /* When animation finishes */
+  100% {
+    opacity: 1;
+    /* simply want to look exactly the way that it looks right now - translate it to 0*/
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    /* positive value goes forward in the x direction - moves right */
+    transform: translateX(10rem);
+  }
+
+  80% {
+    /* moves little bit towards left before it goes back to its original position  */
+    transform: translate(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    /* positive value goes forward in the x direction - moves right */
+    transform: translateY(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* link pseudo class - they are special state of the selectors like hover, checkbox clicked or to select the last child */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  /* Unlike inline elements, inline-block elements respect width, height, padding, and margin properties*/
+  display: inline-block;
+  /* high number - round the edges, same for 200 or 500px */
+  border-radius: 10rem;
+  /* animation using transition property (Defined in initial state) - all properties are enabled to be animated - so transform on hover and in active state will be animated in relation to initial state*/
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+}
+
+/* another pseudo class to select different state of this element */
+.btn:hover {
+  /* negative value moves up(go up) and positive value moves down (go down) because the y axis moves from top to bottom*/
+  transform: translateY(-3px);
+  /* offset in x direction, offset in y direction, blur value , color*/
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* when we click an anchor element then we call it an active state */
+.btn:active {
+  /* moves -1px in relation to the initial link state */
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: #fff;
+  color: #777;
+}
+
+/* Pesudo elements allow us to style certain parts of the elements - after pseudo element acts like a virtual element right after the element that we are selecting and we can style that element */
+
+.btn::after {
+  /* trick is to add an element that looks exactly like the btn that we have, and add it behind the button - when we hover this pseudo element goes behind the button */
+  content: "";
+  /* content and display property are mandatory - inline-block because the btn has inline block and we want this element to look exactly the same */
+  display: inline-block;
+  /* this pseudo element is treated as child of the button - 100% of the width of the button */
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  /* to position behind the button - relative to the button*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* z index defines the position of the element when they are layered one on top of the other */
+  z-index: -1;
+  transition: all 0.3s;
+}
+
+.btn--white::after {
+  background-color: white;
+}
+
+/* when we hover the button we want certain styles to be applied for after pseudo element */
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  /* to fade out - invisible */
+  opacity: 0;
+}
+
+.btn--animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* automatically applies the styles of 0% before the animation starts */
+  animation-fill-mode: backwards;
+}

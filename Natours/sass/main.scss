@@ -1,0 +1,34 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+//main.scss serves to import all other files
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+//no need to import with '_'
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+@import "components/button";
+@import "components/card";
+@import "components/form";
+@import "components/story";
+@import "components/popup";
+@import "components/bg-video";
+@import "components/composition";
+@import "components/feature-box";
+
+@import "layout/footer";
+@import "layout/header";
+@import "layout/grid";
+@import "layout/navigation";
+@import "pages/home";

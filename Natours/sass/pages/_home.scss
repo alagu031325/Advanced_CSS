@@ -1,0 +1,88 @@
+//Even if the website grows only the home page will have the about section
+.section-about {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0;
+  //header - 95vh and polygon is 75vh - so raise up the about section by 20vh
+  margin-top: -20vh;
+
+  @include respond(tab-port) {
+    padding: 20rem 0;
+  }
+}
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(
+      to right,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/nat-4.jpg);
+  margin-top: -10rem;
+  background-size: cover;
+  //we can skew the entire section - negative value skews up
+  transform: skewY(-7deg);
+
+  //direct child selectors - universal selector to select all of children that is a direct child
+  & > * {
+    transform: skewY(7deg);
+  }
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.section-tours {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 15rem 0;
+  margin-top: -10rem;
+
+  @include respond(tab-port) {
+    padding: 20rem 0 10rem 0;
+  }
+}
+
+.section-stories {
+  position: relative;
+  padding: 15rem 0;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-primary-light,
+    $color-primary-dark
+  );
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+//unique to this home page
+.book {
+  //90deg basically goes in the x direction - the gradient is rotated - gradient will not happen and has a solid line in between the two colors that occurs at 50% (transparent is also valid css color - absence of any color)
+  background-image: linear-gradient(
+      105deg,
+      rgba($color-white, 0.9) 0%,
+      rgba($color-white, 0.9) 50%,
+      transparent 50%
+    ),
+    url(../img/nat-10.jpg);
+  // we can also give 100% - exact same thing as cover - stretches the image to occupy the entire container where the image is applied
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.25);
+  height: 50rem;
+
+  &__form {
+    width: 50%;
+    padding: 6rem;
+  }
+}

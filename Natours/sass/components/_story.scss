@@ -1,0 +1,70 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  //because 3rem padding taken by the shape
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  /* & > * {
+    //it will not work with story__shape as it already has a transform going on
+    transform: skewX(12deg);
+  } */
+
+  &__shape {
+    //container - to story__caption
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    //element must be floated to make shape-outside to work and the element must have defined width and height
+    float: left;
+    //shape outside to allow content float around the shape - should define a vectorized shape - 50% means the radius is half of width 15rem (7.5rem) - at the center of circle
+    // -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    //to clip a circle shape
+    clip-path: circle(50% at 50% 50%);
+    //to add margin for a element that is floated we use transform
+    transform: translateX(-3rem) skewX(12deg);
+  }
+
+  &__img {
+    height: 100%;
+    //translate the image to be in center
+    transform: translateX(-4rem) scale(1.4);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    // to make caption center in the container
+    top: 50%;
+    left: 50%;
+    //initially needs to be invisible and when hovered moves up and fades in
+    opacity: 0;
+    transform: translate(-50%, 50%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  //as soon as story is hovered we need to make the caption visible
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    //for brightness value below 100% makes it darker and value above 100% makes it lighter
+    filter: blur(3px) brightness(80%);
+  }
+}

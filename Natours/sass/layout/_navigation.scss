@@ -1,0 +1,192 @@
+.navigation {
+  &__checkbox {
+    display: none;
+  }
+
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    z-index: 1000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+    text-align: center;
+    cursor: pointer;
+
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  &__background {
+    //since we are styling a circle behind
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    //similar to absolute, enables to position element in relation to other element with top, left,.. and doesnt change position on scroll
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    //linear gradient goes from one side to another whereas radial gradient starts from the middle of an element and goes in all outside direction
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    //this always stay on top
+    z-index: 500;
+
+    //transform: scale(90);
+    transition: transform 0.8s cubic-bezier(0.83, 0, 0.17, 1);
+
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+  }
+
+  &__navbar {
+    height: 100vh;
+
+    //when navigation will be in the same place even if we scroll
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 700;
+    opacity: 0;
+    width: 0;
+    //custom timing function - cubic-bezier functions - needs 4 numbers that define that curve
+
+    transition: all 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  &__list {
+    //center inside navbar container
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      //to make the padding and transform properties to apply
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      //solid line gradient
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      background-size: 230%;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+  //it is not adjacent sibling so we use just sibling selector
+  &__checkbox:checked ~ &__background {
+    transform: scale(85);
+  }
+
+  &__checkbox:checked ~ &__navbar {
+    opacity: 1;
+    width: 100%;
+  }
+
+  //ICON
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+    //styles that all 3 lines have in common
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.3s;
+    }
+
+    &::before {
+      //to move this line up
+      top: -0.8rem;
+      //right side will be the origin point for the transformation - if we dont specify then it rotates with origin being at center
+      //   transform-origin: right;
+    }
+
+    &::after {
+      //to move this line down
+      top: 0.8rem;
+    }
+  }
+
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  &__checkbox:checked + &__button &__icon {
+    //if we remove the size of this middle span icon then we would change the positions of before and after pseudo elements
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    //180 - 45 deg = 135 deg just to rotate still more and bring in the effect
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+}

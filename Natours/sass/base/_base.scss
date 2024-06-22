@@ -1,0 +1,40 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/* root font size is set in html */
+html {
+  // global definition of what 1rem is - entire layout/design is dependent on the root font-size
+  font-size: 62.5%; //1rem = 10px  (10px/16px = 62.5%)
+
+  //width < 1200px - larger media queries before the smaller ones
+  @include respond(tab-land) {
+    //we can pass entire block of code into mixin as content - different to passing arguments to mixins
+    font-size: 56.25%; //1rem = 9px  (9px/16px = 56.25%)
+  }
+
+  //width < 900px and < 600px
+  @include respond(tab-port) {
+    //we can pass entire block of code into mixin as content - different to passing arguments to mixins
+    font-size: 50%; //1rem = 8px  (8px/16px = 50%)
+  }
+
+  @include respond(big-desktop) {
+    //we can pass entire block of code into mixin as content - different to passing arguments to mixins
+    font-size: 75%; //1rem = 12px  (12px/16px = 75%)
+  }
+}
+
+/* properties related to fonts are inherited */
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
