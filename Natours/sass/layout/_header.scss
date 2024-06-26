@@ -1,18 +1,36 @@
 //each page will have a header so we classify it as a layout
 .header {
   position: relative;
-  height: 90vh;
+  height: 85vh;
   // In rgba we cant use hexadecimal value along with a opacity - but in scss we can provide the variable and opacity together to calculate the final
   background-image: linear-gradient(
       to right,
       rgba($color-primary-light, 0.8),
       rgba($color-primary-dark, 0.8)
     ),
-    url(../img/hero.jpg);
+    url(../img/hero-small.jpg);
   background-size: cover;
   background-position: top;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  //just needs a dummy value for the property in supports feature query condition
+  @supports (clip-path: polygon(0 0)) or (-webkit-cli-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  //whenever the resolution is higher than 192depths/inch this media query will be applied - when width is 500px it doesnt need the larger version of the image even on the high resolution screens because 1000px image should work fine - 1200/16 = 125em, 600/16 = 37.5em
+  //(min-resolution: 192dpi)  - doesnt work with safari so we use another property
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and (min-width: 125em),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em) {
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
 
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);

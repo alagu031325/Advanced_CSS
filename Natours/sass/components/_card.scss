@@ -15,6 +15,7 @@
     left: 0;
     width: 100%;
     // hides the back part of the element
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 5px;
     //to hide the image that overflows the border
@@ -188,5 +189,59 @@
     font-size: 6rem;
     font-weight: 100;
     margin-bottom: 8rem;
+  }
+
+  //To rewrite for mobile layouts and portrait tablets
+  // @include respond(tab-port) {
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
+    //the back part is visible in the front side when the screen is smaller or when we cant hover on it (touch screens)
+    height: auto;
+    border-radius: 5px;
+    background-color: $color-white;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    &__side {
+      height: auto;
+      position: relative;
+      box-shadow: none;
+      //Front part doesnt need any change
+
+      &--back {
+        //back side is already rotated to 180 deg and is in the back
+        transform: rotateY(0);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+      }
+    }
+
+    //rotate half of the circle(180deg) - rotation is in Y axis
+    &:hover &__side--front {
+      //define the perspective on the parent element where the rotation occurs - to rotate in opposite direction we use -180deg
+      transform: rotateY(0);
+    }
+    //Front styling doesn't need any change
+
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    //BACK SIDE STYLING
+    &__cta {
+      position: relative;
+      top: 0%;
+      left: 0%;
+      transform: translate(0);
+      width: 100%;
+      padding: 7rem 3rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 2rem;
+    }
+
+    &__price-value {
+      //usually big text look good with line font weight
+      font-size: 4rem;
+      margin-bottom: 4rem;
+    }
   }
 }

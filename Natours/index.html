@@ -102,7 +102,26 @@
           <div class="col-1-of-2">
             <!-- div.composition>(img.composition__photo.composition__photo--p1)*3-->
             <div class="composition">
+              <!-- instead of density descriptor we are using width descriptor, we use sizes to inform the browser about the approximate width of the image at different viewport width, src attribute can be used for older browsers that doesnt support srcset-->
               <img
+                srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="Photo 1"
+                class="composition__photo composition__photo--p1"
+                src="img/nat-1-large.jpg" />
+              <img
+                srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w"
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="Photo 2"
+                class="composition__photo composition__photo--p2"
+                src="img/nat-2-large.jpg" />
+              <img
+                srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w"
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="Photo 3"
+                class="composition__photo composition__photo--p3"
+                src="img/nat-3-large.jpg" />
+              <!-- <img
                 src="img/nat-1-large.jpg"
                 alt="Photo 1"
                 class="composition__photo composition__photo--p1" /><img
@@ -111,7 +130,7 @@
                 class="composition__photo composition__photo--p2" /><img
                 src="img/nat-3-large.jpg"
                 alt="Photo 3"
-                class="composition__photo composition__photo--p3" />
+                class="composition__photo composition__photo--p3" /> -->
             </div>
           </div>
         </div>
@@ -410,10 +429,21 @@
 
     <footer class="footer">
       <div class="footer__logo-box">
-        <img
-          src="img/logo-green-2x.png"
-          alt="Enlarged logo"
-          class="footer__logo" />
+        <!-- art direction - makes image dependent on screen width -->
+        <picture class="footer__logo">
+          <!-- we need use atleast one image and 1 or more sources(multiple sources for an image), img is the fallback, in media attribute we can put css media queries - phone breakpoint- img is used when width is less than or equal to 600px-->
+          <source
+            srcset="
+              img/logo-green-small-1x.png 1x,
+              img/logo-green-small-2x.png 2x
+            "
+            media="(max-width:37.5em)" />
+          <img
+            srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x"
+            alt="Enlarged logo"
+            src="img/logo-green-2x.png" />
+        </picture>
+        <!-- we can provide density descriptor in srcset attribute -->
       </div>
       <div class="row">
         <div class="col-1-of-2">

@@ -349,3 +349,25 @@
 - **BAD** - simply using the width of popular devices as the breakpoints
 - **GOOD** - group most used devices in internet and try to group them in a logical way and decide the breakpoint from them
 - **PERFECT** - Look at the content in your design, width are decided based on where the design content breaks
+
+#### Advanced Responsive Design - Responsive Images
+
+- increase web performance - The goal of responsive images is to serve the right image to the right screen size and device, in order to avoid downloading unnecessary large images on smaller screens.
+
+##### When to use responsive images - 3 use cases
+
+- Resolution Switching - serve the same image for a smaller screen but with smaller resolution
+- Density Switching - Where screen size doesn't matter but screen pixel density matters, the amount of pixels found in an inch or cm and there are low resolution screens(typical PC screens and they are 1 x screen) and high resolution screens (modern smart phones and computers - 2 x screen - they use 2 physical pixel to display 1 pixel of our design) - so we serve an image double the resolution of the original image to high resolution screen and half the image resolution on low resolution screens
+- Art Direction - when we want to serve a different image on smaller screens
+
+#### Browser support with @supports
+
+- Graceful degradation - providing top notch experience for modern browsers -and provide adaptive reduced version to all older browsers that dont understand the modern features using @support rule
+
+#### Simple Build Process with NPM Scripts
+
+- npm install autoprefixer --save-dev (needs another npm package to be installed)
+- npm install postcss-cli --save-dev (-b last 10 versions - adds prefix to support major browsers last 10 versions)
+- npm install concat --save-dev
+- npm install npm-run-all --save-dev (to make build work on all platforms like mac, windows and linux )
+- start script is used for development purposes - npm install live-server - to install dev server and start server and watch:sass commands parallely

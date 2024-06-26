@@ -38,3 +38,9 @@ body {
     padding: 0;
   }
 }
+
+// To change the style of the selected text - selection pseudo element
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

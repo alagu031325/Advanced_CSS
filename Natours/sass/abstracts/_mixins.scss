@@ -40,27 +40,28 @@ $breakpoint argument choices:
 
 //ems and rems are not affected by root font size setting in the media queries - 1rem or 1em is always equal to the font size that is coming from the browser - ems are the best option to be used with media queries, so 1em = 16px
 @mixin respond($breakpoint) {
+  //these media queries only apply to screens if someone is trying to printout our web page then these styles wont apply
   @if $breakpoint == phone {
     //600px/16px = 37.5em
-    @media (max-width: 37.5em) {
+    @media only screen and (max-width: 37.5em) {
       @content;
     }
   }
   @if $breakpoint == tab-port {
     //900px/16px = 56.25em
-    @media (max-width: 56.25em) {
+    @media only screen and (max-width: 56.25em) {
       @content;
     }
   }
   @if $breakpoint == tab-land {
     //1200px/16px = 75em
-    @media (max-width: 75em) {
+    @media only screen and (max-width: 75em) {
       @content;
     }
   }
   @if $breakpoint == big-desktop {
     //styles apply when width is equal to or larger than 1800+
-    @media (min-width: 112.5em) {
+    @media only screen and (min-width: 112.5em) {
       @content;
     }
   }
